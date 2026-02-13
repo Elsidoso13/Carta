@@ -26,6 +26,7 @@ const MusicPlayer = ({ isOpen }) => {
 
     const [showOptions, setShowOptions] = useState(false);
     const [feedbackMessage, setFeedbackMessage] = useState(null);
+    const [emailStatus, setEmailStatus] = useState('idle'); // 'idle', 'sending', 'success', 'error'
     const [phoneNumber, setPhoneNumber] = useState('');
 
     const [showRoses, setShowRoses] = useState(false);
@@ -63,8 +64,10 @@ const MusicPlayer = ({ isOpen }) => {
         const TEMPLATE_ID = 'template_gt86z7o';
         const PUBLIC_KEY = 'jmGqDf7hOtNrIgqbC';
 
+        setEmailStatus('sending');
+
         const templateParams = {
-            to_email: 'pacouser2552@gmail.com',
+            to_email: 'pacouser2552@gmail.com', // Verify this email
             message_type: type,
             user_data: data,
         };
@@ -73,8 +76,13 @@ const MusicPlayer = ({ isOpen }) => {
         emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY)
             .then((response) => {
                 console.log('Email sent successfully!', response.status, response.text);
+                setEmailStatus('success');
+                // Optional: Clear success message after a few seconds
+                setTimeout(() => setEmailStatus('idle'), 5000);
             }, (err) => {
                 console.error('Failed to send email:', err);
+                setEmailStatus('error');
+                // alert('Hubo un error al enviar la respuesta. Por favor intenta de nuevo o toma una captura.');
             });
     };
 
@@ -270,7 +278,31 @@ const MusicPlayer = ({ isOpen }) => {
                     )}
 
                     {feedbackMessage && feedbackMessage !== 'input_phone' && (
-                        <p className="lyrics-text feedback-text fade-in">{feedbackMessage}</p>
+                        <div className="feedback-container fade-in">
+                            <p className="lyrics-text feedback-text">{feedbackMessage}</p>
+
+                            {emailStatus === 'sending' && (
+                                <p className="status-text">Enviando respuesta...</p>
+                            )}
+                            {emailStatus === 'success' && (
+                                <p className="status-text success">¡Respuesta enviada con éxito!</p>
+                            )}
+                            {emailStatus === 'error' && (
+                                <div className="error-container">
+                                    <p className="status-text error">Error al enviar, jejeje si mejor te doy mi nùmero (aun no arreglo eso )</p>
+                                    <button
+                                        className="option-btn retry-btn"
+                                        onClick={() => {
+                                            if (phoneNumber) handlePhoneSubmit({ preventDefault: () => { } });
+                                            else if (feedbackMessage.includes('No gracias')) sendEmail('Rejection', 'User selected: No gracias');
+                                            else if (feedbackMessage.includes('Tiene novio')) sendEmail('Rejection', 'User selected: Tiene novio');
+                                        }}
+                                    >
+                                        Reintentar
+                                    </button>
+                                </div>
+                            )}
+                        </div>
                     )}
                 </div>
 

@@ -491,3 +491,52 @@
 .fade-in {
     animation: lyricFade 0.8s ease-out;
 }
+
+/* Feedback and Error Styles */
+.feedback-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.status-text {
+    font-size: 1rem;
+    margin: 0;
+    padding: 0.5rem 1rem;
+    border-radius: 15px;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    transition: all 0.3s ease;
+}
+
+.status-text.success {
+    color: #4ade80;
+    border: 1px solid rgba(74, 222, 128, 0.3);
+}
+
+.status-text.error {
+    color: #fb7185;
+    border: 1px solid rgba(251, 113, 133, 0.3);
+}
+
+.error-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.retry-btn {
+    background: rgba(251, 113, 133, 0.2);
+    border: 1px solid rgba(251, 113, 133, 0.5);
+    padding: 0.5rem 1.2rem;
+    font-size: 0.9rem;
+    width: auto;
+}
+
+.retry-btn:hover {
+    background: rgba(251, 113, 133, 0.4);
+    border-color: #fb7185;
+}
