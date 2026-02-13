@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
+import emailjs from '@emailjs/browser';
 import './MusicPlayer.css';
 import song from './cancion/Frank Ocean - White Ferrari.flac';
 
@@ -56,22 +57,45 @@ const MusicPlayer = ({ isOpen }) => {
         }
     };
 
+    const sendEmail = (type, data) => {
+        // Replace these with your actual EmailJS keys
+        const SERVICE_ID = 'service_mwed2ig';
+        const TEMPLATE_ID = 'template_gt86z7o';
+        const PUBLIC_KEY = 'jmGqDf7hOtNrIgqbC';
+
+        const templateParams = {
+            to_email: 'pacouser2552@gmail.com',
+            message_type: type,
+            user_data: data,
+        };
+
+        // Note: You need to create an EmailJS template that uses {{to_email}}, {{message_type}}, and {{user_data}}
+        emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY)
+            .then((response) => {
+                console.log('Email sent successfully!', response.status, response.text);
+            }, (err) => {
+                console.error('Failed to send email:', err);
+            });
+    };
+
     const handleOptionClick = (option) => {
         if (option === 'yes') {
             setFeedbackMessage('input_phone');
         } else if (option === 'no') {
             setFeedbackMessage('Acepto tu decisión. Gracias por escuchar.');
             setShowOptions(false);
+            sendEmail('Rejection', 'User selected: No gracias');
         } else if (option === 'bf') {
             setFeedbackMessage('Entiendo, gracias por tu honestidad. Que seas muy feliz.');
             setShowOptions(false);
+            sendEmail('Rejection', 'User selected: Tiene novio');
         }
     };
 
     const handlePhoneSubmit = (e) => {
         e.preventDefault();
         setFeedbackMessage(`¡Gracias! Te escribiré pronto. (${phoneNumber})`);
-        // Here you could add logic to actually save/send the number
+        sendEmail('Phone Number', phoneNumber);
     };
 
     const togglePlay = () => {
