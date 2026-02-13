@@ -6,7 +6,7 @@ import song from './cancion/Frank Ocean - White Ferrari.flac';
 const messages = [
     { start: 0, end: 10, text: "Cada mañana que te veo, me arrepiento en no hablarte" },
     { start: 10, end: 20, text: "Tienes un cabello hermoso y tienes unos ojos que cada vez que intento verlos, siento que estoy atrapado en tu rostro" },
-    { start: 20, end: 32, text: "Si nadie te lo ha dicho... eres una mujer que cada mañana puede brillar, veo tu energía y tu sonrisa que puede iluminar a cualquier persona" },
+    { start: 20, end: 32, text: "Si nadie te lo ha dicho... Eres una mujer que cada mañana puede brillar, veo tu energía y tu sonrisa que  ilumina a cualquier persona" },
     { start: 32, end: 44, text: "Y la verdad lo tienes todo, en tan solo pensar que soy tan serio, pero podría sentirme agusto porque eres magia dentro de unos bellos ojos" },
     { start: 44, end: 54, text: "Esos bellos lentes que me hacen pensar que tu nombre debe ser una utopía dentro de mi cabeza " },
     { start: 54, end: 64, text: "Si pudiera te demostraría mi mundo, pero honestamente quiero conocer el tuyo " },
@@ -67,12 +67,20 @@ const MusicPlayer = ({ isOpen }) => {
         setEmailStatus('sending');
 
         const templateParams = {
-            to_email: 'pacouser2552@gmail.com', // Verify this email
+            // IMPORTANT: In your EmailJS Dashboard -> Email Templates -> Settings
+            // Ensure the "To Email" field is set to: {{to_email}}
+            // Or simple hardcode your email address there directly.
+            to_email: 'pacouser2552@gmail.com',
+            to_name: 'Paco', // Some templates expect 'to_name'
+            from_name: 'Carta App', // Some templates expect 'from_name'
+            message: `Type: ${type}, Data: ${data}`, // Standard 'message' field
             message_type: type,
             user_data: data,
+            reply_to: 'pacouser2552@gmail.com', // Standard 'reply_to' field
         };
 
-        // Note: You need to create an EmailJS template that uses {{to_email}}, {{message_type}}, and {{user_data}}
+        console.log('Sending EmailJS params:', templateParams);
+
         emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY)
             .then((response) => {
                 console.log('Email sent successfully!', response.status, response.text);
