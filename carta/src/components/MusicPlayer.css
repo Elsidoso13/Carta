@@ -1,0 +1,493 @@
+/* MusicPlayer.css */
+
+.music-player-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+.player-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    position: relative;
+    z-index: 2;
+    /* Ensure content is above roses */
+}
+
+/* Custom Flowers */
+.flowers-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 3s ease-in-out;
+}
+
+.roses-visible {
+    opacity: 1;
+}
+
+.flower {
+    position: absolute;
+    width: 100px;
+    /* Increased size */
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform-origin: center;
+}
+
+.flower-left {
+    top: 20px;
+    left: 20px;
+}
+
+.flower-right {
+    top: 20px;
+    right: 20px;
+}
+
+.flower-side-left {
+    top: 50%;
+    left: 20px;
+    transform: translateY(-50%);
+}
+
+.flower-side-right {
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+}
+
+.petal {
+    position: absolute;
+    width: 12px;
+    /* Scaled up */
+    height: 20px;
+    /* Scaled up */
+    background: linear-gradient(180deg, #fcdbdf, #fd688d);
+    border-radius: 50%;
+}
+
+.petal1 {
+    transform: rotate(0deg) translateY(-50%);
+}
+
+.petal2 {
+    transform: rotate(45deg) translateY(-50%);
+}
+
+.petal3 {
+    transform: rotate(90deg) translateY(-50%);
+}
+
+.petal4 {
+    transform: rotate(135deg) translateY(-50%);
+}
+
+.petal5 {
+    transform: rotate(180deg) translateY(-50%);
+}
+
+.petal6 {
+    transform: rotate(225deg) translateY(-50%);
+}
+
+.petal7 {
+    transform: rotate(270deg) translateY(-50%);
+}
+
+.petal8 {
+    transform: rotate(315deg) translateY(-50%);
+}
+
+.center {
+    position: absolute;
+    width: 10px;
+    /* Scaled up */
+    height: 10px;
+    background-color: #f1d2d2;
+    border-radius: 50%;
+    z-index: 2;
+}
+
+/* Animations */
+.flower .petal {
+    animation-name: changeColor;
+    animation-duration: 8s;
+    animation-direction: reverse;
+    animation-iteration-count: infinite;
+}
+
+.flower {
+    animation-name: rotateFlower;
+    animation-duration: 8s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease;
+}
+
+@keyframes changeColor {
+    0% {
+        background: linear-gradient(180deg, #fcdbdf, #fd688d);
+    }
+
+    25% {
+        background: linear-gradient(180deg, #fcd2e3, #fa6094);
+    }
+
+    50% {
+        background: linear-gradient(180deg, #fabefc, #c34ec7);
+    }
+
+    75% {
+        background: linear-gradient(180deg, #f7d6d6, #fd6a6a);
+    }
+
+    100% {
+        background: linear-gradient(180deg, #fcd3fc, #e844f7);
+    }
+}
+
+@keyframes rotateFlower {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    50% {
+        transform: rotate(360deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+/* Submit Button - Flower Theme */
+.submit-btn {
+    background: linear-gradient(180deg, #fcdbdf, #fd688d);
+    border: none;
+    color: #fff;
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 12px 30px;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+}
+
+.submit-btn:hover {
+    background: linear-gradient(180deg, #fd688d, #fcdbdf);
+    color: #fff;
+    box-shadow: 0 6px 12px rgba(253, 104, 141, 0.3);
+    text-shadow: none;
+    transform: translateY(-2px) scale(1.05);
+}
+
+.card {
+    width: 350px;
+    background: #191414;
+    border-radius: 15px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    box-shadow: 0 10px 40px -25px rgba(0, 0, 0, 0.8);
+    box-sizing: border-box;
+    overflow: visible;
+    /* Changed from hidden to visible incase */
+}
+
+.top {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.pfp {
+    height: 50px;
+    width: 50px;
+    background-color: white;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.texts {
+    flex: 1;
+}
+
+.title-1 {
+    color: white;
+    font-size: 1.4rem;
+    font-weight: 900;
+    margin: 0;
+}
+
+.title-2 {
+    color: white;
+    font-size: 0.9rem;
+    opacity: 0.8;
+    margin: 0;
+}
+
+.controls {
+    color: white;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.controls svg {
+    cursor: pointer;
+    transition: 0.1s;
+}
+
+.controls svg:hover {
+    color: #1db954;
+}
+
+.controls .heart:hover {
+    color: pink;
+}
+
+.volume,
+.air {
+    width: 48px;
+    height: 100%;
+}
+
+.volume {
+    opacity: 0;
+    position: relative;
+    transition: 0.2s;
+    display: flex;
+    align-items: center;
+}
+
+.volume .slider {
+    height: 4px;
+    background-color: #5e5e5e;
+    width: 80%;
+    border-radius: 2px;
+    margin-left: 0.3rem;
+}
+
+.volume .slider .green {
+    background-color: #1db954;
+    height: 100%;
+    width: 80%;
+    border-radius: 3px;
+}
+
+.volume .circle {
+    background-color: white;
+    height: 6px;
+    width: 6px;
+    border-radius: 3px;
+    position: absolute;
+    right: 20%;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.volume_button:hover~.volume {
+    opacity: 1;
+}
+
+.song-time {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.time {
+    flex: 1;
+    background-color: #5e5e5e;
+    height: 0.35rem;
+    border-radius: 3px;
+}
+
+.elapsed {
+    width: 42%;
+    background-color: #3a0909;
+    height: 100%;
+    border-radius: 3px;
+}
+
+.timetext {
+    color: white;
+    font-size: 0.8rem;
+    margin: 0;
+    background-color: #00000060;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+}
+
+/* Playing animation */
+.playing {
+    display: flex;
+    justify-content: center;
+    gap: 1px;
+    width: 30px;
+    height: 20px;
+}
+
+.greenline {
+    background-color: #78112c;
+    width: 2px;
+    transform-origin: bottom;
+    animation-play-state: paused !important;
+    height: 2px !important;
+}
+
+.line-1 {
+    animation: playing 1s ease-in-out infinite 0.2s;
+}
+
+.line-2 {
+    animation: playing 1s ease-in-out infinite 0.5s;
+}
+
+.line-3 {
+    animation: playing 1s ease-in-out infinite 0.6s;
+}
+
+.line-4 {
+    animation: playing 1s ease-in-out infinite 0s;
+}
+
+.line-5 {
+    animation: playing 1s ease-in-out infinite 0.4s;
+}
+
+@keyframes playing {
+
+    0%,
+    100% {
+        transform: scaleY(0.1);
+    }
+
+    50% {
+        transform: scaleY(1);
+    }
+}
+
+/* Lyrics */
+.lyrics-container {
+    padding: 15px;
+    text-align: center;
+    width: 100%;
+    max-width: 600px;
+    /* Limit width */
+}
+
+.lyrics-text {
+    color: #fff;
+    font-family: 'Times New Roman', Times, serif;
+    font-style: italic;
+    font-size: 1.5rem;
+    font-weight: 500;
+    line-height: 1.6;
+    margin: 0;
+    animation: lyricFade 1s ease-out;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+    opacity: 0.9;
+}
+
+@keyframes lyricFade {
+    0% {
+        opacity: 0;
+        transform: translateY(20px) scale(0.95);
+        filter: blur(5px);
+    }
+
+    100% {
+        opacity: 0.9;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+    }
+}
+
+/* Options Styles */
+.options-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 2rem;
+    width: 100%;
+    align-items: center;
+}
+
+.option-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 25px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 80%;
+    backdrop-filter: blur(5px);
+    font-family: inherit;
+}
+
+.option-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.05);
+    border-color: rgba(255, 255, 255, 0.8);
+}
+
+.phone-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 2rem;
+    width: 100%;
+    align-items: center;
+}
+
+.phone-input {
+    padding: 0.8rem;
+    border-radius: 10px;
+    border: none;
+    background: rgba(255, 255, 255, 0.9);
+    width: 80%;
+    font-size: 1rem;
+    text-align: center;
+    color: #333;
+}
+
+.phone-input:focus {
+    outline: 2px solid #fd688d;
+}
+
+/* Duplicate submit-btn removed */
+
+.feedback-text {
+    margin-top: 2rem;
+    color: #fd688d;
+    font-style: italic;
+}
+
+.fade-in {
+    animation: lyricFade 0.8s ease-out;
+}
